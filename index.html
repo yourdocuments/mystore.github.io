@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Store — Personal App Store</title>
+
+<meta name="description"
+content="A personal app store for showcasing and managing your own apps.">
+
+<style>
+/* =========================================================
+   MY PERSONAL STORE
+   Single-file UI Demo
+   CSS + JS included
+========================================================= */
+
+:root{
+    --bg:#f8fafc;
+    --surface:#ffffff;
+    --surface-2:#f1f5f9;
+    --text:#0f172a;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --primary:#16a34a;
+    --primary-dark:#15803d;
+    --primary-soft:#dcfce7;
+    --yellow:#f59e0b;
+    --shadow:0 10px 30px rgba(15,23,42,.08);
+    --radius:22px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    height:76px;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.header-inner{
+    max-width:1400px;
+    height:100%;
+    margin:auto;
+    padding:0 28px;
+    display:flex;
+    align-items:center;
+    gap:28px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    min-width:max-content;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    background:linear-gradient(135deg,#22c55e,#15803d);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    font-weight:900;
+    box-shadow:0 8px 20px rgba(22,163,74,.25);
+}
+
+.logo-text{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:-.4px;
+}
+
+.logo-text span{
+    color:var(--primary);
+}
+
+.search{
+    flex:1;
+    max-width:570px;
+    margin-left:auto;
+    margin-right:auto;
+    position:relative;
+}
+
+.search-icon{
+    position:absolute;
+    left:17px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#94a3b8;
+    font-size:18px;
+}
+
+.search input{
+    width:100%;
+    height:46px;
+    border:1px solid var(--border);
+    background:#f8fafc;
+    border-radius:15px;
+    outline:none;
+    padding:0 18px 0 46px;
+    color:var(--text);
+    transition:.2s;
+}
+
+.search input:focus{
+    background:white;
+    border-color:#86efac;
+    box-shadow:0 0 0 4px rgba(34,197,94,.1);
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.icon-btn{
+    width:44px;
+    height:44px;
+    border:1px solid var(--border);
+    background:white;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    transition:.2s;
+}
+
+.icon-btn:hover{
+    border-color:#bbf7d0;
+    background:#f0fdf4;
+}
+
+.profile{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#0f172a,#334155);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    font-size:14px;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    padding:34px 28px 80px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:315px;
+    border-radius:28px;
+    overflow:hidden;
+    position:relative;
+    background:
+        radial-gradient(circle at 80% 20%,rgba(74,222,128,.35),transparent 28%),
+        radial-gradient(circle at 100% 100%,rgba(22,163,74,.32),transparent 32%),
+        linear-gradient(135deg,#052e16,#14532d 48%,#166534);
+    color:white;
+    display:flex;
+    align-items:center;
+    padding:48px 54px;
+    box-shadow:0 22px 50px rgba(20,83,45,.18);
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:50%;
+    right:90px;
+    top:-110px;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:50%;
+    right:-100px;
+    bottom:-280px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:650px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.16);
+    backdrop-filter:blur(10px);
+    padding:8px 13px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:48px;
+    line-height:1.08;
+    letter-spacing:-1.8px;
+    margin-bottom:16px;
+}
+
+.hero h1 span{
+    color:#86efac;
+}
+
+.hero p{
+    color:#dcfce7;
+    font-size:16px;
+    line-height:1.7;
+    max-width:560px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:26px;
+}
+
+.btn{
+    height:46px;
+    padding:0 19px;
+    border-radius:13px;
+    border:1px solid transparent;
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:.2s;
+}
+
+.btn-primary{
+    background:white;
+    color:#166534;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.btn-dark{
+    background:rgba(255,255,255,.1);
+    border-color:rgba(255,255,255,.2);
+    color:white;
+}
+
+.btn-dark:hover{
+    background:rgba(255,255,255,.16);
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.section{
+    margin-top:44px;
+}
+
+.section-header{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.section-title{
+    font-size:25px;
+    letter-spacing:-.7px;
+    font-weight:800;
+}
+
+.section-subtitle{
+    color:var(--muted);
+    font-size:14px;
+    margin-top:5px;
+}
+
+.view-all{
+    color:var(--primary-dark);
+    font-size:14px;
+    font-weight:700;
+}
+
+
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
+.categories{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    padding-bottom:5px;
+    scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+    display:none;
+}
+
+.category{
+    flex:0 0 auto;
+    padding:12px 18px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:white;
+    color:#475569;
+    font-size:14px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.category:hover,
+.category.active{
+    background:var(--primary);
+    color:white;
+    border-color:var(--primary);
+}
+
+
+/* =========================================================
+   APP GRID
+========================================================= */
+
+.app-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.app-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:18px;
+    transition:.25s;
+    position:relative;
+    overflow:hidden;
+}
+
+.app-card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow);
+    border-color:#d1fae5;
+}
+
+.app-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.app-icon{
+    width:64px;
+    height:64px;
+    border-radius:17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:27px;
+    font-weight:900;
+    box-shadow:0 9px 20px rgba(15,23,42,.12);
+}
+
+.green{
+    background:linear-gradient(135deg,#22c55e,#15803d);
+}
+
+.blue{
+    background:linear-gradient(135deg,#3b82f6,#1d4ed8);
+}
+
+.purple{
+    background:linear-gradient(135deg,#a855f7,#7e22ce);
+}
+
+.orange{
+    background:linear-gradient(135deg,#fb923c,#ea580c);
+}
+
+.red{
+    background:linear-gradient(135deg,#ef4444,#b91c1c);
+}
+
+.dark{
+    background:linear-gradient(135deg,#334155,#020617);
+}
+
+.verified{
+    font-size:12px;
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    background:#ecfdf5;
+    color:#16a34a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.app-name{
+    font-size:17px;
+    font-weight:800;
+    margin-top:15px;
+}
+
+.app-developer{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+.app-description{
+    font-size:13px;
+    color:#64748b;
+    line-height:1.55;
+    margin-top:12px;
+    min-height:40px;
+}
+
+.app-meta{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:15px;
+    font-size:12px;
+    color:#64748b;
+}
+
+.rating{
+    color:#b45309;
+    font-weight:800;
+}
+
+.install{
+    width:100%;
+    height:40px;
+    border:0;
+    background:#f0fdf4;
+    color:#15803d;
+    border-radius:11px;
+    font-size:13px;
+    font-weight:800;
+    margin-top:16px;
+    transition:.2s;
+}
+
+.install:hover{
+    background:var(--primary);
+    color:white;
+}
+
+
+/* =========================================================
+   FEATURED
+========================================================= */
+
+.featured{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:18px;
+}
+
+.feature-card{
+    min-height:245px;
+    border-radius:22px;
+    padding:30px;
+    color:white;
+    position:relative;
+    overflow:hidden;
+}
+
+.feature-card:first-child{
+    background:
+        radial-gradient(circle at 90% 10%,rgba(134,239,172,.4),transparent 25%),
+        linear-gradient(135deg,#064e3b,#15803d);
+}
+
+.feature-card:last-child{
+    background:
+        radial-gradient(circle at 90% 10%,rgba(147,197,253,.4),transparent 25%),
+        linear-gradient(135deg,#172554,#1d4ed8);
+}
+
+.feature-content{
+    position:relative;
+    z-index:2;
+    max-width:470px;
+}
+
+.feature-card h3{
+    font-size:25px;
+    letter-spacing:-.7px;
+    margin-bottom:9px;
+}
+
+.feature-card p{
+    color:rgba(255,255,255,.78);
+    font-size:14px;
+    line-height:1.6;
+}
+
+.feature-button{
+    display:inline-flex;
+    margin-top:20px;
+    background:white;
+    color:#14532d;
+    padding:10px 15px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:800;
+}
+
+.feature-card:last-child .feature-button{
+    color:#1d4ed8;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:40px;
+}
+
+.stat{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:20px;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:12px;
+    font-weight:600;
+}
+
+.stat-value{
+    font-size:25px;
+    font-weight:850;
+    margin-top:5px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+    margin-top:65px;
+    border-top:1px solid var(--border);
+    padding:28px 0 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:#64748b;
+    font-size:13px;
+}
+
+.footer-links{
+    display:flex;
+    gap:20px;
+}
+
+.footer-links a:hover{
+    color:var(--primary);
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translate(-50%,30px);
+    background:#0f172a;
+    color:white;
+    padding:13px 18px;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:700;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:999;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px){
+
+    .app-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .featured{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:800px){
+
+    .header{
+        height:auto;
+    }
+
+    .header-inner{
+        padding:14px 18px;
+        flex-wrap:wrap;
+        gap:12px;
+    }
+
+    .search{
+        order:3;
+        flex-basis:100%;
+        max-width:none;
+    }
+
+    .container{
+        padding:22px 18px 60px;
+    }
+
+    .hero{
+        padding:34px 28px;
+        min-height:350px;
+    }
+
+    .hero h1{
+        font-size:37px;
+    }
+
+    .app-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:540px){
+
+    .logo-text{
+        font-size:17px;
+    }
+
+    .header-actions .icon-btn{
+        display:none;
+    }
+
+    .hero{
+        border-radius:21px;
+        padding:28px 22px;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .app-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .section-title{
+        font-size:21px;
+    }
+
+    .footer{
+        flex-direction:column;
+        gap:15px;
+        align-items:flex-start;
+    }
+
+    .footer-links{
+        flex-wrap:wrap;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <a href="#" class="logo">
+
+            <div class="logo-icon">
+                M
+            </div>
+
+            <div class="logo-text">
+                My<span>Store</span>
+            </div>
+
+        </a>
+
+        <div class="search">
+
+            <div class="search-icon">⌕</div>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search your apps..."
+                autocomplete="off"
+            >
+
+        </div>
+
+        <div class="header-actions">
+
+            <button class="icon-btn" onclick="showToast('Notifications coming soon')">
+                ♡
+            </button>
+
+            <button class="icon-btn" onclick="showToast('Settings coming soon')">
+                ⚙
+            </button>
+
+            <div class="profile">
+                SU
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =======================================================
+     MAIN
+======================================================= -->
+
+<main class="container">
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ✦ PERSONAL APP STORE
+            </div>
+
+            <h1>
+                All your apps.<br>
+                <span>One personal store.</span>
+            </h1>
+
+            <p>
+                Welcome to your own private app marketplace.
+                Discover, showcase and manage apps created by you,
+                all from one beautiful place.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="scrollToApps()">
+                    Explore Apps →
+                </button>
+
+                <button
+                    class="btn btn-dark"
+                    onclick="showToast('Admin panel will be connected later')">
+                    ⚙ Manage Store
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORIES -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+                <h2 class="section-title">
+                    Browse Apps
+                </h2>
+
+                <p class="section-subtitle">
+                    Your personal collection of applications
+                </p>
+            </div>
+
+            <a href="#apps" class="view-all">
+                View all
+            </a>
+
+        </div>
+
+
+        <div class="categories">
+
+            <button
+                class="category active"
+                onclick="filterApps('all',this)">
+                All Apps
+            </button>
+
+            <button
+                class="category"
+                onclick="filterApps('business',this)">
+                Business
+            </button>
+
+            <button
+                class="category"
+                onclick="filterApps('education',this)">
+                Education
+            </button>
+
+            <button
+                class="category"
+                onclick="filterApps('tools',this)">
+                Tools
+            </button>
+
+            <button
+                class="category"
+                onclick="filterApps('creative',this)">
+                Creative
+            </button>
+
+            <button
+                class="category"
+                onclick="filterApps('productivity',this)">
+                Productivity
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- APPS -->
+
+    <section
+        class="section"
+        id="apps">
+
+        <div class="app-grid" id="appGrid">
+
+
+            <!-- APP 1 -->
+
+            <article
+                class="app-card"
+                data-category="business"
+                data-name="SNK Business">
+
+                <div class="app-top">
+
+                    <div class="app-icon green">
+                        S
+                    </div>
+
+                    <div class="verified">
+                        ✓
+                    </div>
+
+                </div>
+
+                <h3 class="app-name">
+                    SNK Business
+                </h3>
+
+                <p class="app-developer">
+                    SNK
+                </p>
+
+                <p class="app-description">
+                    Business management and accounting platform.
+                </p>
+
+                <div class="app-meta">
+
+                    <span class="rating">
+                        ★ 5.0
+                    </span>
+
+                    <span>
+                        Business
+                    </span>
+
+                </div>
+
+                <button
+                    class="install"
+                    onclick="openApp('SNK Business')">
+                    Open App
+                </button>
+
+            </article>
+
+
+            <!-- APP 2 -->
+
+            <article
+                class="app-card"
+                data-category="education"
+                data-name="SNK Institute">
+
+                <div class="app-top">
+
+                    <div class="app-icon blue">
+                        S
+                    </div>
+
+                    <div class="verified">
+                        ✓
+                    </div>
+
+                </div>
+
+                <h3 class="app-name">
+                    SNK Institute
+                </h3>
+
+                <p class="app-developer">
+                    SNK IT Institute
+                </p>
+
+                <p class="app-description">
+                    Learn, build and grow with online courses.
+                </p>
+
+                <div class="app-meta">
+
+                    <span class="rating">
+                        ★ 4.9
+                    </span>
+
+                    <span>
+                        Education
+                    </span>
+
+                </div>
+
+                <button
+                    class="install"
+                    onclick="openApp('SNK Institute')">
+                    Open App
+                </button>
+
+            </article>
+
+
+            <!-- APP 3 -->
+
+            <article
+                class="app-card"
+                data-category="tools"
+                data-name="SNK Smart Board">
+
+                <div class="app-top">
+
+                    <div class="app-icon purple">
+                        SB
+                    </div>
+
+                    <div class="verified">
+                        ✓
+                    </div>
+
+                </div>
+
+                <h3 class="app-name">
+                    SNK Smart Board
+                </h3>
+
+                <p class="app-developer">
+                    SNK
+                </p>
+
+                <p class="app-description">
+                    Turn your laptop into a digital smart classroom.
+                </p>
+
+                <div class="app-meta">
+
+                    <span class="rating">
+                        ★ 4.9
+                    </span>
+
+                    <span>
+                        Tools
+                    </span>
+
+                </div>
+
+                <button
+                    class="install"
+                    onclick="openApp('SNK Smart Board')">
+                    Open App
+                </button>
+
+            </article>
+
+
+            <!-- APP 4 -->
+
+            <article
+                class="app-card"
+                data-category="creative"
+                data-name="Personal Course Studio">
+
+                <div class="app-top">
+
+                    <div class="app-icon orange">
+                        P
+                    </div>
+
+                    <div class="verified">
+                        ✓
+                    </div>
+
+                </div>
+
+                <h3 class="app-name">
+                    Personal Course Studio
+                </h3>
+
+                <p class="app-developer">
+                    SNK Studio
+                </p>
+
+                <p class="app-description">
+                    Create professional course videos and lessons.
+                </p>
+
+                <div class="app-meta">
+
+                    <span class="rating">
+                        ★ 5.0
+                    </span>
+
+                    <span>
+                        Creative
+                    </span>
+
+                </div>
+
+                <button
+                    class="install"
+                    onclick="openApp('Personal Course Studio')">
+                    Open App
+                </button>
+
+            </article>
+
+
+            <!-- APP 5 -->
+
+            <article
+                class="app-card"
+                data-category="business"
+                data-name="Shopping Mela">
+
+                <div class="app-top">
+
+                    <div class="app-icon red">
+                        SM
+                    </div>
+
+                    <div class="verified">
+                        ✓
+                    </div>
+
+                </div>
+
+                <h3 class="app-name">
+                    Shopping Mela
+                </h3>
+
+                <p class="app-developer">
+                    SNK
+                </p>
+
+                <p class="app-description">
+                    Local marketplace and business advertising platform.
+                </p>
+
+                <div class="app-meta">
+
+                    <span class="rating">
+                        ★ 4.8
+                    </span>
+
+                    <span>
+                        Business
+                    </span>
+
+                </div>
+
+                <button
+                    class="install"
+                    onclick="openApp('Shopping Mela')">
+                    Open App
+                </button>
+
+            </article>
+
+
+            <!-- APP 6 -->
+
+            <article
+                class="app-card"
+                data-category="productivity"
+                data-name="USHA AI">
+
+                <div class="app-top">
+
+                    <div class="app-icon dark">
+                        U
+                    </div>
+
+                    <div class="verified">
+                        ✓
+                    </div>
+
+                </div>
+
+                <h3 class="app-name">
+                    USHA AI
+                </h3>
+
+                <p class="app-developer">
+                    SNK AI
+                </p>
+
+                <p class="app-description">
+                    Your personal AI assistant for learning and work.
+                </p>
+
+                <div class="app-meta">
+
+                    <span class="rating">
+                        ★ 5.0
+                    </span>
+
+                    <span>
+                        Productivity
+                    </span>
+
+                </div>
+
+                <button
+                    class="install"
+                    onclick="openApp('USHA AI')">
+                    Open App
+                </button>
+
+            </article>
+
+
+            <!-- APP 7 -->
+
+            <article
+                class="app-card"
+                data-category="tools"
+                data-name="Video Notes">
+
+                <div class="app-top">
+
+                    <div class="app-icon blue">
+                        VN
+                    </div>
+
+                    <div class="verified">
+                        ✓
+                    </div>
+
+                </div>
+
+                <h3 class="app-name">
+                    Video Notes
+                </h3>
+
+                <p class="app-developer">
+                    SNK Tools
+                </p>
+
+                <p class="app-description">
+                    Watch videos, create timestamp notes and export them.
+                </p>
+
+                <div class="app-meta">
+
+                    <span class="rating">
+                        ★ 4.8
+                    </span>
+
+                    <span>
+                        Tools
+                    </span>
+
+                </div>
+
+                <button
+                    class="install"
+                    onclick="openApp('Video Notes')">
+                    Open App
+                </button>
+
+            </article>
+
+
+            <!-- APP 8 -->
+
+            <article
+                class="app-card"
+                data-category="creative"
+                data-name="SNK Ad Studio">
+
+                <div class="app-top">
+
+                    <div class="app-icon purple">
+                        AD
+                    </div>
+
+                    <div class="verified">
+                        ✓
+                    </div>
+
+                </div>
+
+                <h3 class="app-name">
+                    SNK Ad Studio
+                </h3>
+
+                <p class="app-developer">
+                    SNK Creative
+                </p>
+
+                <p class="app-description">
+                    Create cinematic advertisements and promotional content.
+                </p>
+
+                <div class="app-meta">
+
+                    <span class="rating">
+                        ★ 4.9
+                    </span>
+
+                    <span>
+                        Creative
+                    </span>
+
+                </div>
+
+                <button
+                    class="install"
+                    onclick="openApp('SNK Ad Studio')">
+                    Open App
+                </button>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURED -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+                <h2 class="section-title">
+                    From Your Studio
+                </h2>
+
+                <p class="section-subtitle">
+                    More things you can build with your personal store
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="featured">
+
+            <div class="feature-card">
+
+                <div class="feature-content">
+
+                    <h3>
+                        Your Apps. Your Brand.
+                    </h3>
+
+                    <p>
+                        This store can become your own private
+                        app ecosystem where every application,
+                        logo, screenshot and description is controlled
+                        from your admin panel.
+                    </p>
+
+                    <button
+                        class="feature-button"
+                        onclick="showToast('App management will be added later')">
+                        Manage Apps →
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-content">
+
+                    <h3>
+                        Ready for Admin
+                    </h3>
+
+                    <p>
+                        Later we can connect a separate Admin Login,
+                        Admin Dashboard and App Management system.
+                    </p>
+
+                    <button
+                        class="feature-button"
+                        onclick="showToast('Admin system coming in the next step')">
+                        Admin Panel →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                TOTAL APPS
+            </div>
+
+            <div class="stat-value">
+                8
+            </div>
+
+        </div>
+
+        <div class="stat">
+
+            <div class="stat-label">
+                CATEGORIES
+            </div>
+
+            <div class="stat-value">
+                5
+            </div>
+
+        </div>
+
+        <div class="stat">
+
+            <div class="stat-label">
+                VERIFIED APPS
+            </div>
+
+            <div class="stat-value">
+                8
+            </div>
+
+        </div>
+
+        <div class="stat">
+
+            <div class="stat-label">
+                STORE STATUS
+            </div>
+
+            <div class="stat-value">
+                ● Live
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div>
+            © 2026 MyStore · Personal App Store
+        </div>
+
+        <div class="footer-links">
+
+            <a href="#" onclick="showToast('About page coming soon');return false;">
+                About
+            </a>
+
+            <a href="#" onclick="showToast('Privacy page coming soon');return false;">
+                Privacy
+            </a>
+
+            <a href="#" onclick="showToast('Admin login coming soon');return false;">
+                Admin
+            </a>
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<script>
+/* =========================================================
+   PERSONAL APP STORE JS
+========================================================= */
+
+(function(){
+
+    "use strict";
+
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const appCards =
+        document.querySelectorAll(".app-card");
+
+
+    searchInput.addEventListener("input", function(){
+
+        const search =
+            this.value.toLowerCase().trim();
+
+        appCards.forEach(function(card){
+
+            const name =
+                card.dataset.name.toLowerCase();
+
+            const text =
+                card.innerText.toLowerCase();
+
+            if(
+                name.includes(search) ||
+                text.includes(search)
+            ){
+
+                card.style.display = "";
+
+            }else{
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+
+    /* =====================================================
+       FILTER
+    ===================================================== */
+
+    window.filterApps = function(category, button){
+
+        document
+            .querySelectorAll(".category")
+            .forEach(function(btn){
+
+                btn.classList.remove("active");
+
+            });
+
+        button.classList.add("active");
+
+        appCards.forEach(function(card){
+
+            if(
+                category === "all" ||
+                card.dataset.category === category
+            ){
+
+                card.style.display = "";
+
+            }else{
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    };
+
+
+    /* =====================================================
+       OPEN APP
+    ===================================================== */
+
+    window.openApp = function(appName){
+
+        showToast(
+            appName + " — App page will be connected later."
+        );
+
+    };
+
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    window.showToast = function(message){
+
+        const toast =
+            document.getElementById("toast");
+
+        toast.textContent = message;
+
+        toast.classList.add("show");
+
+        clearTimeout(window.toastTimer);
+
+        window.toastTimer =
+            setTimeout(function(){
+
+                toast.classList.remove("show");
+
+            },2800);
+
+    };
+
+
+    /* =====================================================
+       SCROLL TO APPS
+    ===================================================== */
+
+    window.scrollToApps = function(){
+
+        document
+            .getElementById("apps")
+            .scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+
+    };
+
+
+})();
+</script>
+
+</body>
+</html>
